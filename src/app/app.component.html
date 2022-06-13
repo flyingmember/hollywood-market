@@ -1,0 +1,39 @@
+<p>
+  Money {{playerService.$money | async}}
+</p>
+<hr>
+
+<div *ngFor="let person of peopleService.$ownerships | async" class="flex flex-row">
+  <img [src]="person?.image" class="h-64">
+  <div class="flex flex-col">
+    <p>
+      {{person?.firstName}}
+      {{person?.lastName}}
+    </p>
+  </div>
+</div>
+
+<div *ngFor="let trader of traders | keyvalue" class="flex flex-col">
+  <div class="flex flex-col">
+    <p>
+      {{trader.key}} trader
+    </p>
+  </div>
+  <div class="flex flex-col" *ngFor="let trade of trader.value.trades">
+    <button *ngIf="people.get(trade.girlId) as girl" (click)="tradersService.trade(trade)">
+      Buy {{girl.firstName}} {{girl.lastName}} for {{trade.price}}$
+    </button>
+  </div>
+</div>
+
+<!--
+<div *ngFor="let person of people | keyvalue" class="flex flex-row">
+  <img [src]="person.value.image" class="h-64">
+  <div class="flex flex-col">
+    <p>
+      {{person.value.firstName}}
+      {{person.value.lastName}}
+    </p>
+    <button (click)="peopleService.add(person.key)">Buy</button>
+  </div>
+</div> -->
