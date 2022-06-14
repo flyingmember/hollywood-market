@@ -14,7 +14,7 @@ export function BuildActions(fame: number): Action[] {
         tradersService: TradersService,
         playerService: PlayerService
       ): IPersonInstance => {
-        playerService.money += 10000;
+        playerService.money += fame;
         instance.relation.obedience += 0.01;
         return instance;
       }

@@ -7,6 +7,6 @@ export const id = 'natalie-dyer';
 
 export const image = 'assets/people/natalie-dyer/Natalia_Dyer_by_Gage_Skidmore.jpeg';
 
-export const fame = 100000;
+export const fame = 1000000;
 
 export const actions = BuildActions(fame);

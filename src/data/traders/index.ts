@@ -1,5 +1,6 @@
 import * as CosplayTrader from './cosplay';
 import * as ActorsTrader from './actors';
+import * as TwitchTrader from './twitch';
 
 export type Trade = {
   type: string;
@@ -13,5 +14,6 @@ export type TraderData = {
 
 export const traders = new Map<string, TraderData>([
   [ActorsTrader.id, ActorsTrader],
+  [TwitchTrader.id, TwitchTrader],
   [CosplayTrader.id, CosplayTrader]
 ])
