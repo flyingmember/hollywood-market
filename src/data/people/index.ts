@@ -4,6 +4,7 @@ import { TradersService } from 'src/app/services/traders.service';
 import * as JessicaNigri from './jessiga-nigri';
 import * as NatalieDyer from './natalie-dyer';
 import * as Pokimane from './pokimane';
+import * as LeaElui from './lea-elui';
 
 export type ActionFN = (
   instance: IPersonInstance,
@@ -30,4 +31,5 @@ export const people = new Map<string, PersonData>([
   [JessicaNigri.id, JessicaNigri],
   [NatalieDyer.id, NatalieDyer],
   [Pokimane.id, Pokimane],
+  [LeaElui.id, LeaElui],
 ])
