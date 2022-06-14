@@ -4,7 +4,6 @@ import * as ActorsTrader from './actors';
 export type Trade = {
   type: string;
   girlId: string;
-  price: number;
 }
 
 export type TraderData = {

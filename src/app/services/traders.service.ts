@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { people } from 'src/data/people';
 
 import { Trade } from '../../data/traders'
 import { PeopleService } from './people.service';
@@ -11,8 +12,8 @@ import { PlayerService } from './player.service';
 export class TradersService {
 
   trade(trade: Trade) {
-    this.player.money -= trade.price;
-    this.people.add(trade.girlId);
+    this.player.money -= people.get(trade.girlId)?.fame!;
+    this.people.patch(trade.girlId, { owned: true });
   }
 
   constructor(
