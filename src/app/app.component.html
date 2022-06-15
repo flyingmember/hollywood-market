@@ -3,35 +3,7 @@
 </p>
 <hr>
 
-<div *ngFor="let person of peopleService.$owned | async" class="flex flex-row">
-  <img [src]="person.data.image" class="h-64">
-  <div class="flex flex-col">
-    <p>
-      {{person.data.firstName}}
-      {{person.data.lastName}}
-    </p>
-    <p>Love: {{person.relation.love}}</p>
-    <p>Obedience: {{person.relation.obedience}}</p>
-    <button *ngFor="let action of (person.data.actions || [])"
-      (click)="actionsService.doActionFunction(person.id, action.do)">
-      {{action.name}}
-    </button>
-  </div>
-</div>
-
-<div *ngFor="let trader of traders | keyvalue" class="flex flex-col">
-  <div class="flex flex-col">
-    <p>
-      {{trader.key}} trader
-    </p>
-  </div>
-  <div class="flex flex-col" *ngFor="let trade of trader.value.trades">
-    <button *ngIf="people.get(trade.girlId) as girl" (click)="tradersService.trade(trade)"
-      [class.text-red-500]="girl.fame > (playerService.$money | async)!">
-      Buy {{girl.firstName}} {{girl.lastName}} for {{girl.fame}}$
-    </button>
-  </div>
-</div>
+<app-location></app-location>
 
 <!--
 <div *ngFor="let person of people | keyvalue" class="flex flex-row">

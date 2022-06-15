@@ -5,3 +5,5 @@ export const trades = [
 ]
 
 export const id = 'cosplay';
+
+export const location = 'debug';

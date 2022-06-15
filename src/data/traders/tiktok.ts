@@ -5,3 +5,5 @@ export const trades = [
 ]
 
 export const id = 'tiktok';
+
+export const location = 'debug';

@@ -1,17 +1,9 @@
-import * as CosplayTrader from './cosplay';
+import { TraderData } from 'src/models/traders';
+
 import * as ActorsTrader from './actors';
-import * as TwitchTrader from './twitch';
+import * as CosplayTrader from './cosplay';
 import * as TikTok from './tiktok';
-
-export type Trade = {
-  type: string;
-  girlId: string;
-}
-
-export type TraderData = {
-  trades: Trade[];
-  id: string;
-}
+import * as TwitchTrader from './twitch';
 
 export const traders = new Map<string, TraderData>([
   [ActorsTrader.id, ActorsTrader],

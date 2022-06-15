@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { people } from 'src/data/people';
+import { traders } from 'src/data/traders';
+import { Trade, TraderData } from 'src/models/traders';
 
-import { Trade } from '../../data/traders'
 import { PeopleService } from './people.service';
 import { PlayerService } from './player.service';
 
@@ -13,7 +14,15 @@ export class TradersService {
 
   trade(trade: Trade) {
     this.player.money -= people.get(trade.girlId)?.fame!;
-    this.people.patch(trade.girlId, { owned: true });
+    this.people.patch(trade.girlId, { ownedByPlayer: true });
+  }
+
+  getOnLocation(location: string): Observable<TraderData[]> {
+    return of(
+      Object.entries(traders)
+        .map(([id, trader]) => trader as TraderData)
+        .filter(v => v.location === location)
+    );
   }
 
   constructor(

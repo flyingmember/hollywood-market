@@ -1,62 +1,63 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map } from 'rxjs';
-import { people, PersonData } from 'src/data/people';
+import { BehaviorSubject, map, Observable } from 'rxjs';
+import { people } from 'src/data/people';
+import { IPersonInstance, PersonData } from 'src/models/people';
 
-export interface IPersonInstance {
-  id: string;
-  relation: {
-    love: number;
-    obedience: number;
-  };
-  owned: boolean;
-}
-
-export interface IPersonInstanceMapped {
-  id: string;
-  relation: {
-    love: number;
-    obedience: number;
-  };
-  owned: boolean;
+export interface IPersonInstanceMapped extends IPersonInstance {
   data: PersonData;
 }
 
 export const DefaultInstance: IPersonInstance = {
   id: 'id',
+  location: 'debug',
   relation: {
     love: 0,
     obedience: 0,
   },
-  owned: false,
+  enslaved: false,
+  ownedByPlayer: false,
 }
+
+const InitialList: { [key: string]: IPersonInstance; } = {};
+
+people.forEach(person => InitialList[person.id] = {
+  ...DefaultInstance,
+  ...person.initial,
+  id: person.id
+})
 
 @Injectable({
   providedIn: 'root'
 })
 export class PeopleService {
 
-  private peopleInstances = new BehaviorSubject<{ [key: string]: IPersonInstance; }>({});
+  private peopleInstances = new BehaviorSubject<{ [key: string]: IPersonInstance; }>(InitialList);
 
   get People(): { [key: string]: IPersonInstance; } { return this.peopleInstances.getValue(); }
   set People(data: { [key: string]: IPersonInstance; }) { this.peopleInstances.next(data); }
 
   public $people = this.peopleInstances.pipe(
-    map((v) => {
-      return Object.values(v).map((person): IPersonInstanceMapped => ({
-        ...person,
-        data: people.get(person.id)!
-      }));
-    })
+    map((v) => Object.values(v).map((person): IPersonInstanceMapped => ({
+      ...person,
+      data: people.get(person.id)!
+    })))
   );
 
   public $owned = this.$people.pipe(
-    map(v => v.filter(person => person.owned))
+    map(v => v.filter(person => person.ownedByPlayer))
   );
+
+  getOnLocation(location: string): Observable<IPersonInstanceMapped[]> {
+    return this.$people.pipe(
+      map(ppl => ppl.filter(v => v.location === location))
+    );
+  }
 
   public patch(key: string, data: Partial<IPersonInstance>) {
     const ppl = this.People;
     ppl[key] = {
       ...JSON.parse(JSON.stringify(DefaultInstance)),
+      ...people.get(key)?.initial,
       ...ppl[key],
       ...data,
       id: key,

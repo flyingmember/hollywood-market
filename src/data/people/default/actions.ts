@@ -1,8 +1,8 @@
-import { IPersonInstance, PeopleService } from 'src/app/services/people.service';
+import { PeopleService } from 'src/app/services/people.service';
 import { PlayerService } from 'src/app/services/player.service';
 import { TradersService } from 'src/app/services/traders.service';
+import { Action, IPersonInstance } from 'src/models/people';
 
-import { Action } from '..';
 
 export function BuildActions(fame: number): Action[] {
   return [

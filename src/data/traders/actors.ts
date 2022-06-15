@@ -5,3 +5,5 @@ export const trades = [
 ]
 
 export const id = 'actors';
+
+export const location = 'debug';

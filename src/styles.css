@@ -2,3 +2,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body, html, app-root {
+  @apply h-full w-full flex flex-col;
+}
+
+.link {
+  @apply text-blue-500 cursor-pointer;
+}
+
+.link:not(:hover) {
+  @apply underline;
+}

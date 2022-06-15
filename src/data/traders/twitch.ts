@@ -5,3 +5,5 @@ export const trades = [
 ]
 
 export const id = 'twitch';
+
+export const location = 'debug';
