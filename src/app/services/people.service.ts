@@ -21,8 +21,8 @@ export const DefaultInstance: IPersonInstance = {
 const InitialList: { [key: string]: IPersonInstance; } = {};
 
 people.forEach(person => InitialList[person.id] = {
-  ...DefaultInstance,
-  ...person.initial,
+  ...JSON.parse(JSON.stringify(DefaultInstance)),
+  ...JSON.parse(JSON.stringify(person.initial || {})),
   id: person.id
 })
 

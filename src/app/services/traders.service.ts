@@ -19,7 +19,7 @@ export class TradersService {
 
   getOnLocation(location: string): Observable<TraderData[]> {
     return of(
-      Object.entries(traders)
+      [...traders.entries()]
         .map(([id, trader]) => trader as TraderData)
         .filter(v => v.location === location)
     );
@@ -28,5 +28,7 @@ export class TradersService {
   constructor(
     private player: PlayerService,
     private people: PeopleService
-  ) { }
+  ) {
+    console.log(traders)
+  }
 }

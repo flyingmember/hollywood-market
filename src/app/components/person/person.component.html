@@ -1,0 +1,19 @@
+<img [src]="person.data.image" class="h-64 w-52 object-cover object-center mr-4 rounded">
+<div class="flex flex-col">
+  <div class="flex flex-row gap-2 flex-wrap text-xs">
+    <div *ngIf="slave" class="rounded-full px-1 text-white bg-black">enslaved</div>
+    <div *ngIf="yourSlave" class="rounded-full px-1 bg-yellow-500">your slave</div>
+    <div *ngIf="sub" class="rounded-full px-1 text-white bg-purple-500">sub</div>
+    <div *ngIf="lover" class="rounded-full px-1 text-white bg-red-500">lover</div>
+  </div>
+  <p>
+    {{person.data.firstName}}
+    {{person.data.lastName}}
+  </p>
+  <p>Love: {{person.relation.love}}</p>
+  <p>Obedience: {{person.relation.obedience | number}}</p>
+  <button *ngFor="let action of (person.data.actions || [])"
+    (click)="actionsService.doActionFunction(person.id, action.do)">
+    {{action.name}}
+  </button>
+</div>

@@ -14,3 +14,7 @@ body, html, app-root {
 .link:not(:hover) {
   @apply underline;
 }
+
+h1 {
+  @apply border-b font-bold text-3xl border-black py-1 mb-1;
+}

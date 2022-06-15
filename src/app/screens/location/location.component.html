@@ -7,22 +7,12 @@
     go to {{connection.toId}}
   </div>
 
-  <div *ngFor="let person of $people | async" class="flex flex-row">
-    <img [src]="person.data.image" class="h-64">
-    <div class="flex flex-col">
-      <p>
-        {{person.data.firstName}}
-        {{person.data.lastName}}
-      </p>
-      <p>Love: {{person.relation.love}}</p>
-      <p>Obedience: {{person.relation.obedience}}</p>
-      <button *ngFor="let action of (person.data.actions || [])"
-        (click)="actionsService.doActionFunction(person.id, action.do)">
-        {{action.name}}
-      </button>
-    </div>
+  <h1>People here</h1>
+  <div class="flex flex-row flex-wrap w-full gap-4">
+    <app-person *ngFor="let person of $people | async" [person]="person"></app-person>
   </div>
 
+  <h1>Traders here</h1>
   <div *ngFor="let trader of $traders | async" class="flex flex-col">
     <div class="flex flex-col">
       <p>
